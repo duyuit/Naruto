@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Animations>
+  <Animation name="move" imagePath="rasengan.png" width="500" height="500">
+    <sprite x="23" y="23" w="98" h="78" oX="23" oY="23" oW="92" oH="449" />
+    <sprite x="142" y="26" w="96" h="76" oX="142" oY="26" oW="92" oH="449" />
+    <sprite x="260" y="25" w="89" h="78" oX="260" oY="25" oW="92" oH="449" />
+    <sprite x="372" y="25" w="94" h="79" oX="372" oY="25" oW="92" oH="449" />
+  </Animation>
+  <Animation name="soil" imagePath="rasengan.png" width="500" height="500">
+    <sprite x="28" y="128" w="120" h="38" oX="28" oY="128" oW="243" oH="522" />
+    <sprite x="168" y="129" w="141" h="37" oX="168" oY="129" oW="243" oH="522" />
+    <sprite x="327" y="124" w="151" h="43" oX="327" oY="124" oW="243" oH="522" />
+    <sprite x="0" y="183" w="146" h="51" oX="0" oY="183" oW="243" oH="522" />
+    <sprite x="167" y="187" w="165" h="52" oX="167" oY="187" oW="243" oH="522" />
+    <sprite x="358" y="193" w="111" h="41" oX="358" oY="193" oW="243" oH="522" />
+  </Animation>
+
+  <Animation name="dust1" imagePath="rasengan.png" width="500" height="500">
+    <sprite x="37" y="261" w="41" h="20" oX="37" oY="261" oW="377" oH="380" />
+    <sprite x="156" y="253" w="59" h="28" oX="156" oY="253" oW="377" oH="380" />
+    <sprite x="319" y="258" w="57" h="26" oX="319" oY="258" oW="377" oH="380" />
+    <sprite x="24" y="317" w="56" h="28" oX="24" oY="317" oW="377" oH="380" />
+    <sprite x="185" y="317" w="54" h="30" oX="185" oY="317" oW="377" oH="380" />
+    <sprite x="345" y="317" w="51" h="27" oX="345" oY="317" oW="377" oH="380" />
+    <sprite x="24" y="384" w="30" h="20" oX="24" oY="384" oW="377" oH="380" />
+  </Animation>
+
+</Animations>
