@@ -10,23 +10,54 @@
     <Filter Include="src">
       <UniqueIdentifier>{bb6c862e-70e9-49d9-81b7-3829a6f50471}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Player">
+      <UniqueIdentifier>{45dd2cbc-439d-4fd1-baf5-f1f6c8a2abc0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Game Components">
+      <UniqueIdentifier>{34e9a175-57fe-4b95-88f5-20d1d62f7def}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>win32</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\AppDelegate.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\HelloWorldScene.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="Player.cpp">
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\ParallaxNodeExtras.cpp">
       <Filter>resource</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerState.cpp">
+      <Filter>src\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerDtate.cpp">
+      <Filter>src\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>src\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerIDLE.cpp" />
+    <ClCompile Include="PlayerRun.cpp" />
+    <ClCompile Include="PLayerJump.cpp" />
+    <ClCompile Include="PlaterRasengan1.cpp" />
+    <ClCompile Include="PlayerThrowStand.cpp" />
+    <ClCompile Include="PlayerThrowJump.cpp" />
+    <ClCompile Include="PlayerFight.cpp" />
+    <ClCompile Include="PlayerHurt.cpp" />
+    <ClCompile Include="PlayerHurtFly.cpp" />
+    <ClCompile Include="..\Classes\AppDelegate.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="GameComponents\GameLog.cpp">
+      <Filter>src\Game Components</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerFightUp.cpp" />
+    <ClCompile Include="PlayerFightDown.cpp" />
+    <ClCompile Include="PlayerParticle.cpp">
+      <Filter>src\Game Components</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerSwipe.cpp" />
+    <ClCompile Include="PlayerCombo.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -38,12 +69,37 @@
     <ClInclude Include="..\Classes\HelloWorldScene.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>src</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\ParallaxNodeExtras.h">
       <Filter>resource</Filter>
     </ClInclude>
+    <ClInclude Include="PlayerState.h">
+      <Filter>src\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerDtate.h">
+      <Filter>src\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>src\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerIDLE.h" />
+    <ClInclude Include="PlayerRun.h" />
+    <ClInclude Include="PLayerJump.h" />
+    <ClInclude Include="PlaterRasengan1.h" />
+    <ClInclude Include="PlayerThrowStand.h" />
+    <ClInclude Include="PlayerThrowJump.h" />
+    <ClInclude Include="PlayerFight.h" />
+    <ClInclude Include="PlayerHurt.h" />
+    <ClInclude Include="PlayerHurtFly.h" />
+    <ClInclude Include="GameComponents\GameLog.h">
+      <Filter>src\Game Components</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerFightUp.h" />
+    <ClInclude Include="PlayerFightDown.h" />
+    <ClInclude Include="PlayerParticle.h">
+      <Filter>src\Game Components</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerSwipe.h" />
+    <ClInclude Include="PlayerCombo.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">

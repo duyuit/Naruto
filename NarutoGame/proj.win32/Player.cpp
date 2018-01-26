@@ -1,5 +1,20 @@
 ﻿#include "Player.h"
 #include "spine/AttachmentVertices.h"
+#include "PlayerIDLE.h"
+#include "PlayerRun.h"
+#include "PlayerHurt.h"
+#include "PlayerHurtFly.h"
+#include "HelloWorldScene.h"
+#include "PLayerJump.h"
+#include "PlayerSwipe.h"
+#include "PlayerFight.h"
+#include "PlayerFightUp.h"
+#include "PlayerFightDown.h"
+#include "PlayerCombo.h"
+#include "PlayerThrowStand.h"
+#include "PlayerThrowJump.h"
+#include "PlaterRasengan1.h"
+#include "PlayerParticle.h"
 
 using namespace cocos2d;
 
@@ -16,148 +31,175 @@ Player::Player(Layer *parent)
 	Vector<SpriteFrame*> fightFrameList = loadAnim("narutoAction.xml", "fight");
 	Vector<SpriteFrame*> throwStandFrameList = loadAnim("narutoAction.xml", "throwstand");
 	Vector<SpriteFrame*> throwJumpFrameList = loadAnim("narutoAction.xml", "throwJump");
-	Vector<SpriteFrame*> fightUpFrameList = loadAnim("narutoAction.xml", "fightUp");
-
+	Vector<SpriteFrame*> fightRunFrameList = loadAnim("narutoAction.xml", "fightRun"); 	Vector<SpriteFrame*> fightUpFrameList = loadAnim("narutoAction.xml", "fightUp"); Vector<SpriteFrame*> fightDownFrameList = loadAnim("narutoAction.xml", "fightJump");
+	Vector<SpriteFrame*> hurtFrameList = loadAnim("narutoAction.xml", "hurt");
+	Vector<SpriteFrame*> hurtFlyFrameList = loadAnim("narutoAction.xml", "hurtFly");
 	Vector<SpriteFrame*> rasengan1FrameList = loadAnim("narutoAction.xml", "rasengan1");
+	Vector<SpriteFrame*> comboFrameList = loadAnim("narutoAction.xml", "Combo");
 	Vector<SpriteFrame*> dustFrameList = loadAnim("rasengan1.xml", "dust1");
+
+
+	Vector<SpriteFrame*> tesst = Player::loadAnim("particle.xml", "fallFire");
+	testne = new RefPtr<Animate>(Animate::create(Animation::createWithSpriteFrames(tesst, 0.1f)));
 	
 
+	
 
-	idleAnimation = Animation::createWithSpriteFrames(standFrameList, 0.08f);
-	jumpAnimation= Animation::createWithSpriteFrames(jumpFrameList, 0.05f);
-	idleAnimate = new RefPtr<Animate>(Animate::create(idleAnimation));
-	jumpAnimate =new RefPtr<Animate>(Animate::create(jumpAnimation));
+	//Khai bao animate
+	comboAnimate= new RefPtr<Animate>(Animate::create(Animation::createWithSpriteFrames(comboFrameList, 0.1f)));
+	hurtFly = new RefPtr<Animate>(Animate::create(Animation::createWithSpriteFrames(hurtFlyFrameList, 0.1f)));
+	hurtAnimate = new RefPtr<Animate>(Animate::create(Animation::createWithSpriteFrames(hurtFrameList, 0.07f)));
+	idleAnimate = new RefPtr<Animate>(Animate::create(Animation::createWithSpriteFrames(standFrameList, 0.08f)));
+	jumpAnimate =new RefPtr<Animate>(Animate::create(Animation::createWithSpriteFrames(jumpFrameList, 0.05f)));
 	runAnimate= new RefPtr<Animate>(Animate::create(Animation::createWithSpriteFrames(runFrameList, 0.07f)));
-	fightAnimate= new RefPtr<Animate>(Animate::create(Animation::createWithSpriteFrames(fightFrameList, 0.07f)));
+	fightAnimate= new RefPtr<Animate>(Animate::create(Animation::createWithSpriteFrames(fightFrameList, 0.07f))); 	fightUpAnimate = new RefPtr<Animate>(Animate::create(Animation::createWithSpriteFrames(fightUpFrameList, 0.07f))); 	fightDownAnimate = new RefPtr<Animate>(Animate::create(Animation::createWithSpriteFrames(fightDownFrameList, 0.07f)));
 	throwStand = new RefPtr<Animate>(Animate::create(Animation::createWithSpriteFrames(throwStandFrameList, 0.07f)));
 	throwJump= new RefPtr<Animate>(Animate::create(Animation::createWithSpriteFrames(throwJumpFrameList, 0.07f)));
-	fightRun = new RefPtr<Animate>(Animate::create(Animation::createWithSpriteFrames(fightUpFrameList, 0.05f)));
-
+	fightRun = new RefPtr<Animate>(Animate::create(Animation::createWithSpriteFrames(fightRunFrameList, 0.05f)));
 	rasengan1 = new RefPtr<Animate>(Animate::create(Animation::createWithSpriteFrames(rasengan1FrameList, 0.04f)));
 	dustAnimate= new RefPtr<Animate>(Animate::create(Animation::createWithSpriteFrames(dustFrameList, 0.15f)));
-	//runAnimate->get()->setResetFrame(3);
-	//jumpping->autorelease();
-	//standing->autorelease();
-	//running->autorelease();
+
 
 	this->initWithSpriteFrame(standFrameList.at(0));
 	this->setPosition(100,200);
 	this->setAnchorPoint(Vec2(0.5,0));
-	auto player_body = PhysicsBody::createBox(this->getContentSize());
+	this->setScale(1.5,1.5);
 
-	player_body->setContactTestBitmask(0x1);
-	player_body->setRotationEnable(false);
-	player_body->setDynamic(true);
-	player_body->getShape(0)->setRestitution(0.0f);//đàn hồi
-	this->setPhysicsBody(player_body);
+	
+	auto verti = PhysicsBody::createBox(Size(this->getContentSize().width-20,this->getContentSize().height));
+	verti->setContactTestBitmask(0x1);
+	verti->setRotationEnable(false);
+	verti->setDynamic(true);
+	verti->getShape(0)->setRestitution(0.0f);//đàn hồi
+	this->setPhysicsBody(verti);
 
 	
 	
-	dust = Sprite::createWithSpriteFrame(dustFrameList.at(0));
-	dust->setAnchorPoint(Vec2(1, 0));
-	dust->setVisible(false);
-	parent->addChild(dust);
+	//dust = Sprite::createWithSpriteFrame(dustFrameList.at(0));
+	//dust->setAnchorPoint(Vec2(1, 0));
+	//dust->setVisible(false);
+	//parent->addChild(dust);
+
+	this->mData = new PlayerData();
+	this->mData->player = this;
+	mCurrentState = new PlayerIDLE(mData);
+	mCurrentAnimate = idleAnimate;
+	mCurrentAction = mCurrentAnimate->get();
+	SetState(new PlayerHurt(mData));
+
+
 }
 
-void Player::Jump()
+
+
+void Player::SetState(PlayerState *state)
 {
-	if (currentState == JUMP) return;
-	this->stopAllActions();
-	if( currentState == THROWJUMP)
-	this->getPhysicsBody()->setVelocity(Vec2(this->getPhysicsBody()->getVelocity().x, 200));
-	auto temp = jumpAnimate->get();
-	temp->setTag(JUMP);
-	this->runAction(temp);
-	currentState = JUMP;
+	if(mCurrentState!=NULL && mCurrentState != nullptr)
+	delete mCurrentState;
+	if(mCurrentAnimate != NULL && mCurrentAnimate != nullptr)
+	mCurrentAnimate->get()->ResetAnimate();
 
-	
-	runAnimate->get()->ResetAnimate();
-	throwJump->get()->ResetAnimate();
-}
-
-void Player::Stand()
-{
-	if (currentState == IDLE) return;
-	
-	this->stopAllActions();
-	this->runAction(RepeatForever::create(idleAnimate->get()));
-	//this->runAction(runAnimate->get());
-	currentState = IDLE;
-
-	jumpAnimate->get()->ResetAnimate();
-	runAnimate->get()->ResetAnimate();
-	fightAnimate->get()->ResetAnimate();
-	fightRun->get()->ResetAnimate();
-	throwStand->get()->ResetAnimate();
-}
-
-void Player::Run()
+	mCurrentState = state;
+	this->stopAction(mCurrentAction);
+	switch (mCurrentState->GetState())
 	{
-	if (currentState == THROWSTAND || currentState==THROWJUMP || currentState == FIGHT) return;
-	float y = this->getPhysicsBody()->getVelocity().y;
-	if (currentState != RUN)
-	{
-		this->stopAllActions();
-		if (abs(y) > 0)
-		{
-			Jump();
-			return;
-		}
-		this->runAction(RepeatForever::create(runAnimate->get()));
-		dust->runAction(RepeatForever::create(dustAnimate->get()));
+	case PlayerState::IDLE:
+	
+		//this->getPhysicsBody()->setRotationOffset(0);
+		this->getPhysicsBody()->setPositionOffset(Vec2(0, 0));
+		
+		mCurrentAnimate = idleAnimate;
+		mCurrentAction = RepeatForever::create(mCurrentAnimate->get());
+	
+
+		break;
+	case PlayerState::RUN:
+		mCurrentAnimate = runAnimate;
+		mCurrentAction = RepeatForever::create(mCurrentAnimate->get());
+		break;
+	case PlayerState::RASENGAN1:
+		mCurrentAnimate = rasengan1;
+		mCurrentAction = mCurrentAnimate->get();
+		break;
+	case PlayerState::JUMP:
+		this->getPhysicsBody()->setPositionOffset(Vec2(0, 0));
+		mCurrentAnimate = jumpAnimate;
+		mCurrentAction = mCurrentAnimate->get();
+		break;
+	case PlayerState::FIGHT:
+		mCurrentAnimate = fightAnimate;
+		if (isLeft)
+			this->getPhysicsBody()->setPositionOffset(Vec2(-10, 0));
+		else
+			this->getPhysicsBody()->setPositionOffset(Vec2(10, 0));
+		mCurrentAction = mCurrentAnimate->get();
+		break;
+	case PlayerState::THROWSTAND:
+		mCurrentAnimate = throwStand;
+		mCurrentAction = mCurrentAnimate->get();
+		break;
+	case PlayerState::THROWJUMP:
+		mCurrentAnimate = throwJump;
+		mCurrentAction = mCurrentAnimate->get();
+		break;
+	case PlayerState::HURT:
+		mCurrentAnimate = hurtAnimate;
+		mCurrentAction = mCurrentAnimate->get();
+		break;
+	case PlayerState::HURTFLY:
+	/*	this->getPhysicsBody()->setRotationOffset(90);
+		this->getPhysicsBody()->setPositionOffset(Vec2(0, -this->getContentSize().width/2));*/
+		mCurrentAnimate = hurtFly;
+		mCurrentAnimate->get()->setLockFrame(1);
+		mCurrentAction = mCurrentAnimate->get();
+		break;
+	case PlayerState::FIGHTUP:
+		mCurrentAnimate = fightUpAnimate;
+		if (isLeft)
+			this->getPhysicsBody()->setPositionOffset(Vec2(-20, 0));
+		else
+			this->getPhysicsBody()->setPositionOffset(Vec2(20, 0));
+		mCurrentAction = mCurrentAnimate->get();
+		break;
+	case PlayerState::FIGHTDOWN:
+		mCurrentAnimate = fightDownAnimate;
+		if (isLeft)
+			this->getPhysicsBody()->setPositionOffset(Vec2(-20, 0));
+		else
+			this->getPhysicsBody()->setPositionOffset(Vec2(20, 0));
+		mCurrentAction = mCurrentAnimate->get();
+		break;
+	case PlayerState::SWIPE:
+		mCurrentAnimate = runAnimate;
+		mCurrentAction = mCurrentAnimate->get();
+		break;
+	case PlayerState::COMBO:
+		mCurrentAnimate = comboAnimate;
+		mCurrentAction = mCurrentAnimate->get();
+		break;
 	}
-
-	jumpAnimate->get()->ResetAnimate();
-	currentState = RUN;
+	this->runAction(mCurrentAction);
 }
 
-void Player::Fight()
+void Player::SetStateByTag(PlayerState::StateAction action)
 {
-	if (currentState == FIGHT) return;
-	this->stopAllActions();
-	if (keys[EventKeyboard::KeyCode::KEY_RIGHT_ARROW] || keys[EventKeyboard::KeyCode::KEY_LEFT_ARROW])
-	{
-		this->runAction(fightRun->get());
-		fightAnimate->get()->ResetAnimate();
-	}
-	else
-	{
-		this->runAction(fightAnimate->get());
-		fightRun->get()->ResetAnimate();
-	}
-	currentState = FIGHT;
-}
-
-void Player::ThrowStand()
-{
-	if (currentState == THROWSTAND) return;
-	if (currentState != IDLE && currentState != RUN) return;
-	this->stopAllActions();
-	this->runAction(throwStand->get());	
-
-	currentState = THROWSTAND;
-	
-}
-
-void Player::ThrowJump()
-{
-	if (currentState == THROWJUMP) return;
-
-	this->stopAllActions();
-	this->runAction(throwJump->get());
-	currentState = THROWJUMP;
-
-
-	jumpAnimate->get()->ResetAnimate();
-}
-
-void Player::Rasengan1()
-{
-	if (currentState != IDLE ) return;
-	this->stopAllActions();
-	this->runAction(rasengan1->get());
-	
-	currentState = RASENGAN1;
+	switch (action) { 
+	case PlayerState::IDLE: 
+		this->SetState(new PlayerIDLE(mData));
+		break;
+	case PlayerState::SWIPE:this->SetState(new PlayerSwipe(mData)); break;
+	case PlayerState::RUN:this->SetState(new PlayerRun(mData)); break;
+	case PlayerState::JUMP:this->SetState(new PLayerJump(mData)); break;
+	case PlayerState::FIGHT: this->SetState(new PlayerFight(mData)); break;
+	case PlayerState::FIGHTUP:this->SetState(new PlayerFightUp(mData)); break;
+	case PlayerState::FIGHTDOWN:this->SetState(new PlayerFightDown(mData)); break;
+	case PlayerState::COMBO:this->SetState(new PlayerCombo(mData)); break;
+	case PlayerState::THROWSTAND:this->SetState(new PlayerThrowStand(mData)); break;
+	case PlayerState::THROWJUMP:this->SetState(new PlayerThrowJump(mData)); break;
+	case PlayerState::RASENGAN1:this->SetState(new PlayerRasengan1(mData)); break;
+	case PlayerState::HURT:this->SetState(new PlayerHurt(mData)); break;
+	case PlayerState::HURTFLY:this->SetState(new PlayerHurtFly(mData)); break;
+	default: ; }
 }
 
 Vector<SpriteFrame*> Player::loadAnim(char* path, string key)
@@ -201,246 +243,90 @@ Vector<SpriteFrame*> Player::loadAnim(char* path, string key)
 	return list;
 
 }
+
+
+
 bool isActive = false;
 void Player::update(float delta)
 {
-	bool checkIDLE = false;
-	dust->setVisible(false);
-	float x = this->getPhysicsBody()->getVelocity().x;
-	float y = this->getPhysicsBody()->getVelocity().y;
-	
-	//if (abs(y) <10  && abs(x) <1 && currentState!=IDLE) Stand();
-	if (keys[EventKeyboard::KeyCode::KEY_LEFT_ARROW])
-	{
-		Run();
-		isLeft = true;
-		this->setFlipX(isLeft);
-		this->setPosition(this->getPosition() - Vec2(5, 0));
-		this->getPhysicsBody()->setVelocity(Vec2(-1, y));
-		
-		
-		checkIDLE = true;
-	}
-	if (keys[EventKeyboard::KeyCode::KEY_RIGHT_ARROW])
-	{
-		
-		Run();
-		this->setFlipX(isLeft);
-		isLeft = false;
-		this->setPosition(this->getPosition() + Vec2(5, 0));
-		this->getPhysicsBody()->setVelocity(Vec2(1, y));
-		checkIDLE = true;
-	}
-	if (keys[EventKeyboard::KeyCode::KEY_SPACE])
-	{
-		Jump();
-		this->getPhysicsBody()->setVelocity(Vec2(x, 150));
-		checkIDLE = true;
-	}
-	if (keys[EventKeyboard::KeyCode::KEY_E])
-	{
-			Fight();
-			checkIDLE = true;	
-	}
-	if (keys[EventKeyboard::KeyCode::KEY_R])
-	{
 
-		Rasengan1();
-		checkIDLE = true;
+	this->setFlipX(isLeft);
+	mCurrentState->HandleCombo(keysCombo, timeCombo);
+	mCurrentState->HandleKeyboard(keys);
+	mCurrentFrame = mCurrentAnimate->get()->getCurrentFrameIndex();
+	if (isCollider)
+		OnCollision(enemy);
+	mCurrentState->Update(delta);
 
-	}
-	if (keys[EventKeyboard::KeyCode::KEY_Q])
-	{
-		if(currentState==IDLE)
-			ThrowStand();
-		if (currentState == JUMP)
-			ThrowJump();
-		checkIDLE = true;
-
-	}
-	switch (currentState)
-	{
-	case IDLE:
-		break;
-	case RUN:
-		dust->setVisible(true);
-		if (isLeft)
-		{
-			dust->setPosition(this->getPosition() + Vec2(20, 0));
-			dust->setAnchorPoint(Vec2(0, 0));
-		}
-		else
-		{
-			dust->setPosition(this->getPosition() + Vec2(-20, 0));
-			dust->setAnchorPoint(Vec2(1, 0));
-		}
-		dust->setFlipX(isLeft);
-		break;
-	case JUMP:
-		if (y == 0)
-		{
-			jumpAnimate->get()->setLockFrame(-1);
-			Stand();
-		}
-		else
-			if (jumpAnimate->get()->getCurrentFrameIndex() >= 2)
-				jumpAnimate->get()->setLockFrame(2);
-			checkIDLE = true;
-		break;
-	case THROWJUMP:
-		if (throwJump->get()->getCurrentFrameIndex() == throwJump->get()->getAnimation()->getFrames().size() - 1)
-		{
-			Jump();
-			checkIDLE = true;
-			break;
-		}
-		if (throwJump->get()->getCurrentFrameIndex() == 1 && GetTickCount() - lastUpdate >= 200)
-		{
-			auto shuriken = Sprite::create("shuriken.png");
-			this->getParent()->addChild(shuriken);
-			auto shuriken_body = PhysicsBody::createBox(shuriken->getContentSize());
-			shuriken_body->setDynamic(false);
-			shuriken->setPhysicsBody(shuriken_body);
-			if (isLeft)
-			{
-				shuriken->setPosition(this->getPosition() + Vec2(-this->getContentSize().width / 2, this->getContentSize().height / 2));
-				auto move = MoveTo::create(1.5f,Vec2(shuriken->getPosition().x-400,0));
-				auto rotate = RotateTo::create(1.5f, -360 * 6);
-
-				shuriken->runAction(rotate);
-				shuriken->runAction(Sequence::create(
-					move,
-					CallFuncN::create(CC_CALLBACK_1(Player::XoaChild, this)), NULL));
-			}
-			else
-			{
-				shuriken->setPosition(this->getPosition() + this->getContentSize() / 2);
-				auto move = MoveTo::create(1.5f, Vec2(shuriken->getPosition().x + 400, 0));
-				auto rotate = RotateTo::create(1.5f, 360 * 6);
-
-				shuriken->runAction(rotate);
-				shuriken->runAction(Sequence::create(
-					move,
-					CallFuncN::create(CC_CALLBACK_1(Player::XoaChild, this)), NULL));
-			}
-			lastUpdate = GetTickCount();
-		 checkIDLE = true;
-		}
-		break;
-	case FIGHT:
-		if (fightAnimate->get()->getCurrentFrameIndex() == fightAnimate->get()->getAnimation()->getFrames().size() - 1) Stand();
-		else checkIDLE = true;
-		if (fightRun->get()->getCurrentFrameIndex() == fightRun->get()->getAnimation()->getFrames().size() - 1) Stand();
-		else checkIDLE = true;
-		break;
-	case THROWSTAND:	
-		if (throwStand->get()->getCurrentFrameIndex() == throwStand->get()->getAnimation()->getFrames().size() - 1) Stand();
-		else checkIDLE = true;
-		if(throwStand->get()->getCurrentFrameIndex() == 1&& GetTickCount()-lastUpdate>=200)
-		{
-			
-			auto shuriken = Sprite::create("shuriken.png");
-			this->getParent()->addChild(shuriken);
-			auto shuriken_body = PhysicsBody::createBox(shuriken->getContentSize());
-			shuriken_body->setDynamic(false);
-			shuriken->setPhysicsBody(shuriken_body);
-			if (isLeft)
-			{
-				shuriken->setPosition(this->getPosition() + Vec2(-this->getContentSize().width / 2, this->getContentSize().height / 2));
-				auto move = MoveTo::create(1.5f, shuriken->getPosition() + Vec2(-400, 0));
-				auto rotate = RotateTo::create(1.5f, -360 * 6);
-
-				shuriken->runAction(rotate);
-				shuriken->runAction(Sequence::create(
-					move,
-					CallFuncN::create(CC_CALLBACK_1(Player::XoaChild, this)), NULL));
-			}
-			else
-			{
-				shuriken->setPosition(this->getPosition() + this->getContentSize() / 2);
-				auto move = MoveTo::create(1.5f, shuriken->getPosition() + Vec2(400, 0));
-				auto rotate = RotateTo::create(1.5f, 360 * 6);
-
-				shuriken->runAction(rotate);
-				shuriken->runAction(Sequence::create(
-					move,
-					CallFuncN::create(CC_CALLBACK_1(Player::XoaChild, this)), NULL));
-			}
-			lastUpdate = GetTickCount();
-
-		}
-		break;
-	case RASENGAN1:
-	//59
-		
-			if (rasengan1->get()->getCurrentFrameIndex() <=40)
-			{
-				if(isLeft)
-					this->setAnchorPoint(Vec2(0, 0));
-				else
-				this->setAnchorPoint(Vec2(1, 0));
-			}
-			else
-			{
-				this->setAnchorPoint(Vec2(0.5, 0));
-			}
-			if(rasengan1->get()->getCurrentFrameIndex()==51 && GetTickCount()-lastUpdate>500)
-			{
-				Vector<SpriteFrame*> rasengan1Object = loadAnim("rasengan1.xml", "move");
-				Sprite* rasengan = Sprite::createWithSpriteFrame(rasengan1Object.at(0));
-				this->getParent()->addChild(rasengan);
-				
-				auto rasengan_body = PhysicsBody::createBox(rasengan->getContentSize());
-				rasengan_body->setDynamic(false);
-				rasengan->setPhysicsBody(rasengan_body);
-
-				Vector<SpriteFrame*> soilObject = loadAnim("rasengan1.xml", "soil");
-				Sprite* soil = Sprite::createWithSpriteFrame(soilObject.at(0));
-				soil->setAnchorPoint(Vec2(0.5, 0));
-				this->getParent()->addChild(soil);
-				rasengan->setFlipX(isLeft);
-				soil->setFlipX(isLeft);
-				if (isLeft)
-				{
-					rasengan->setPosition(this->getPosition() + Vec2(-this->getContentSize().width / 2, this->getContentSize().height / 2 + 10));
-					rasengan->runAction(RepeatForever::create(Animate::create(Animation::createWithSpriteFrames(rasengan1Object, 0.1f))));
-					rasengan->runAction(Sequence::create(
-						MoveTo::create(1, rasengan->getPosition() + Vec2(-400, 0)),
-						CallFuncN::create(CC_CALLBACK_1(Player::XoaChild, this)), NULL));
-
-					soil->setPosition(this->getPosition() + Vec2(-this->getContentSize().width / 2, -10));
-					soil->runAction(RepeatForever::create(Animate::create(Animation::createWithSpriteFrames(soilObject, 0.06f))));
-					soil->runAction(Sequence::create(
-						MoveTo::create(1, soil->getPosition() + Vec2(-400, 0)),
-						CallFuncN::create(CC_CALLBACK_1(Player::XoaChild, this)), NULL));
-				}else
-				{
-					rasengan->setPosition(this->getPosition() + Vec2(this->getContentSize().width / 2, this->getContentSize().height / 2 + 10));
-					rasengan->runAction(RepeatForever::create(Animate::create(Animation::createWithSpriteFrames(rasengan1Object, 0.1f))));
-					rasengan->runAction(Sequence::create(
-						MoveTo::create(1, rasengan->getPosition() + Vec2(400, 0)),
-						CallFuncN::create(CC_CALLBACK_1(Player::XoaChild, this)), NULL));
-
-					soil->setPosition(this->getPosition() + Vec2(this->getContentSize().width / 2, -10));
-					soil->runAction(RepeatForever::create(Animate::create(Animation::createWithSpriteFrames(soilObject, 0.06f))));
-					soil->runAction(Sequence::create(
-						MoveTo::create(1, soil->getPosition() + Vec2(400, 0)),
-						CallFuncN::create(CC_CALLBACK_1(Player::XoaChild, this)), NULL));
-					
-				}
-
-				lastUpdate = GetTickCount();
-			}
-			break;
-	}
-	
-	if (!checkIDLE) Stand();
 }
 
 void Player::XoaChild(Node* sender)
 {
 	auto sprite = (Sprite *)sender;
 	this->getParent()->removeChild(sprite, true);
+}
+
+void Player::OnCollision(Node* sender)
+{
+	if(sender->getTag()!=1)
+	{
+		if (sender->getTag() == HelloWorld::RASENGAN && mCurrentState->GetState() != PlayerState::HURTFLY)
+		{
+			this->getPhysicsBody()->applyImpulse(Vec2(80000, 120000));
+			this->SetStateByTag(PlayerState::HURTFLY);
+			return;
+		}
+		if (sender->getTag() == HelloWorld::SHURIKEN && mCurrentState->GetState() != PlayerState::HURT)
+		{
+			PlayerParticle::CreateHit(sender->getPosition(),(Layer*) this->getParent());
+			sender->stopAllActions();
+			sender->runAction(RemoveSelf::create());
+			this->SetStateByTag(PlayerState::HURT);
+			return;
+		}
+		/*if (sender->getTag() == HelloWorld::BRICK && mCurrentState->GetState()==PlayerState::HURTFLY)
+		{
+			this->SetStateByTag(PlayerState::IDLE);
+		}*/
+	}
+	else
+	{
+		mCurrentState->OnCollision(sender);
+	}
+}
+
+void Player::SetEnemy(Player* enemy)
+{
+	this->enemy = enemy;
+}
+
+RECT Player::GetBound()
+{
+	RECT rect;
+	rect.left = this->getPosition().x - this->getContentSize().width/2 +10;
+	rect.right = this->getPosition().x + this->getContentSize().width / 2 - 10;
+	rect.top = this->getPosition().y + this->getContentSize().height;
+	rect.bottom = this->getPosition().y;
+	return rect;
+}
+
+void Player::ChangeIDLE()
+{
+	SetState(new PlayerIDLE(mData));
+}
+
+void Player::ChangeJump()
+{
+	mCurrentAnimate->get()->ResetAnimate();
+	this->stopAction(mCurrentAction);
+	mCurrentAction = jumpAnimate->get();
+	this->runAction(mCurrentAction);
+	
+}
+
+void Player::AddPosition(Vec2 pos)
+{
+	this->setPosition(this->getPosition() + pos);
 }
 
 Player::~Player()

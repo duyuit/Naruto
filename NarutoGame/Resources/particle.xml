@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Animations>
+  <Animation name="dualSmoke" imagePath="89533.png" width="1054" height="5324">
+    <sprite x="40" y="1718" w="81" h="20" oX="40" oY="1718" oW="1784" oH="859" />
+    <sprite x="149" y="1711" w="114" h="28" oX="149" oY="1711" oW="1784" oH="859" />
+    <sprite x="290" y="1713" w="119" h="26" oX="290" oY="1713" oW="1784" oH="859" />
+    <sprite x="441" y="1717" w="123" h="24" oX="441" oY="1717" oW="1784" oH="859" />
+    <sprite x="601" y="1713" w="133" h="30" oX="601" oY="1713" oW="1784" oH="859" />
+    <sprite x="767" y="1717" w="133" h="27" oX="767" oY="1717" oW="1784" oH="859" />
+    <sprite x="44" y="1774" w="135" h="20" oX="44" oY="1774" oW="1784" oH="859" />
+</Animation> 
+  <Animation name="fallFire" imagePath="rasengan.png" width="500" height="500">
+    <sprite x="195" y="361" w="34" h="54" oX="195" oY="361" oW="301" oH="467" />
+    <sprite x="251" y="344" w="62" h="78" oX="251" oY="344" oW="301" oH="467" />
+    <sprite x="331" y="374" w="68" h="41" oX="331" oY="374" oW="301" oH="467" />
+    <sprite x="406" y="385" w="80" h="30" oX="406" oY="385" oW="301" oH="467" />
+    <sprite x="23" y="439" w="83" h="29" oX="23" oY="439" oW="301" oH="467" />
+  </Animation>
+
+</Animations>

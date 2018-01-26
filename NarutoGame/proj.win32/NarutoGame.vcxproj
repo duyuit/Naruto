@@ -150,15 +150,49 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
     <ClCompile Include="..\Classes\HelloWorldScene.cpp" />
     <ClCompile Include="..\Classes\ParallaxNodeExtras.cpp" />
+    <ClCompile Include="GameComponents\GameLog.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="PlaterRasengan1.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayerCombo.cpp" />
+    <ClCompile Include="PlayerDtate.cpp" />
+    <ClCompile Include="PlayerFight.cpp" />
+    <ClCompile Include="PlayerFightDown.cpp" />
+    <ClCompile Include="PlayerFightUp.cpp" />
+    <ClCompile Include="PlayerHurt.cpp" />
+    <ClCompile Include="PlayerHurtFly.cpp" />
+    <ClCompile Include="PlayerIDLE.cpp" />
+    <ClCompile Include="PLayerJump.cpp" />
+    <ClCompile Include="PlayerParticle.cpp" />
+    <ClCompile Include="PlayerRun.cpp" />
+    <ClCompile Include="PlayerState.cpp" />
+    <ClCompile Include="PlayerSwipe.cpp" />
+    <ClCompile Include="PlayerThrowJump.cpp" />
+    <ClCompile Include="PlayerThrowStand.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate.h" />
     <ClInclude Include="..\Classes\HelloWorldScene.h" />
     <ClInclude Include="..\Classes\ParallaxNodeExtras.h" />
+    <ClInclude Include="GameComponents\GameLog.h" />
     <ClInclude Include="main.h" />
+    <ClInclude Include="PlaterRasengan1.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="PlayerCombo.h" />
+    <ClInclude Include="PlayerDtate.h" />
+    <ClInclude Include="PlayerFight.h" />
+    <ClInclude Include="PlayerFightDown.h" />
+    <ClInclude Include="PlayerFightUp.h" />
+    <ClInclude Include="PlayerHurt.h" />
+    <ClInclude Include="PlayerHurtFly.h" />
+    <ClInclude Include="PlayerIDLE.h" />
+    <ClInclude Include="PLayerJump.h" />
+    <ClInclude Include="PlayerParticle.h" />
+    <ClInclude Include="PlayerRun.h" />
+    <ClInclude Include="PlayerState.h" />
+    <ClInclude Include="PlayerSwipe.h" />
+    <ClInclude Include="PlayerThrowJump.h" />
+    <ClInclude Include="PlayerThrowStand.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\cocos2d\cocos\2d\libcocos2d.vcxproj">

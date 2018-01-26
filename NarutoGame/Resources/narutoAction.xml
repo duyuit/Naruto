@@ -1,16 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Animations>
+  <Animation name="Combo" imagePath="89533.png" width="1054" height="5324">
+    <sprite x="296" y="1546" w="39" h="54" oX="296" oY="1546" oW="1596" oH="945" />
+    <sprite x="349" y="1546" w="37" h="54" oX="349" oY="1546" oW="1596" oH="945" />
+    <sprite x="858" y="1770" w="47" h="54" oX="858" oY="1770" oW="1596" oH="945" />
+    <sprite x="922" y="1770" w="39" h="54" oX="922" oY="1770" oW="1596" oH="945" />
+    <sprite x="459" y="1545" w="41" h="55" oX="459" oY="1545" oW="1596" oH="945" />
+    <sprite x="514" y="1549" w="56" h="51" oX="514" oY="1549" oW="1596" oH="945" />
+    <sprite x="579" y="1552" w="49" h="48" oX="579" oY="1552" oW="1596" oH="945" />
+    <sprite x="637" y="1552" w="49" h="48" oX="637" oY="1552" oW="1596" oH="945" />
+    <sprite x="748" y="1564" w="33" h="40" oX="748" oY="1564" oW="1596" oH="945" />
+    <sprite x="794" y="1570" w="38" h="31" oX="794" oY="1570" oW="1596" oH="945" />
+    <sprite x="852" y="1569" w="46" h="31" oX="852" oY="1569" oW="1596" oH="945" />
+    <sprite x="905" y="1539" w="49" h="61" oX="905" oY="1539" oW="1596" oH="945" />
+    <sprite x="962" y="1548" w="49" h="52" oX="962" oY="1548" oW="1596" oH="945" />
+    <sprite x="588" y="1847" w="48" h="56" oX="588" oY="1847" oW="1596" oH="945" />
+    <sprite x="656" y="1840" w="49" h="71" oX="656" oY="1840" oW="1596" oH="945" />
+    <sprite x="725" y="1838" w="48" h="67" oX="725" oY="1838" oW="1596" oH="945" />
+    <sprite x="39" y="1636" w="31" h="39" oX="39" oY="1636" oW="1596" oH="945" />
+    <sprite x="108" y="1633" w="40" h="47" oX="108" oY="1633" oW="1596" oH="945" />
+    <sprite x="160" y="1627" w="32" h="57" oX="160" oY="1627" oW="1596" oH="945" />
+    <sprite x="203" y="1631" w="50" h="45" oX="203" oY="1631" oW="1596" oH="945" />
+    <sprite x="264" y="1631" w="50" h="45" oX="264" oY="1631" oW="1596" oH="945" />
+  </Animation>
+
   <Animation name="throwJump" imagePath="89533.png" width="1054" height="5324">
     <sprite x="701" y="846" w="34" h="57" oX="701" oY="846" oW="203" oH="133" />
     <sprite x="746" y="849" w="51" h="50" oX="746" oY="849" oW="203" oH="133" />
     <sprite x="807" y="853" w="48" h="46" oX="807" oY="853" oW="203" oH="133" />
   </Animation>
-  <Animation name="fightUp" imagePath="89533.png" width="1054" height="5324">
+  <Animation name="fightRun" imagePath="89533.png" width="1054" height="5324">
     <sprite x="389" y="744" w="50" h="41" oX="389" oY="744" oW="401" oH="303" />
     <sprite x="456" y="733" w="46" h="54" oX="456" oY="733" oW="401" oH="303" />
     <sprite x="515" y="733" w="49" h="54" oX="515" oY="733" oW="401" oH="303" />
     <sprite x="577" y="737" w="50" h="50" oX="577" oY="737" oW="401" oH="303" />
     <sprite x="640" y="742" w="46" h="45" oX="640" oY="742" oW="401" oH="303" />
+  </Animation>
+  <Animation name="hurtFly" imagePath="89533.png" width="1054" height="5324">
+    <sprite x="172" y="497" w="43" h="47" oX="172" oY="497" oW="412" oH="247" />
+    <sprite x="231" y="517" w="56" h="27" oX="231" oY="517" oW="412" oH="247" />
+    <sprite x="302" y="526" w="60" h="20" oX="302" oY="526" oW="412" oH="247" />
+    <sprite x="377" y="509" w="45" h="39" oX="377" oY="509" oW="412" oH="247" />
   </Animation>
 
   <Animation name="idle" imagePath="89533.png" width="1054" height="5324">
@@ -26,7 +56,25 @@
     <sprite x="73" y="366" w="34" h="62" oX="73" oY="366" oW="431" oH="289" />
     <sprite x="140" y="365" w="49" h="63" oX="140" oY="365" oW="431" oH="289" />
     <sprite x="203" y="366" w="49" h="62" oX="203" oY="366" oW="431" oH="289" />
-    <sprite x="277" y="397" w="31" h="42" oX="277" oY="397" oW="431" oH="289" />
+  </Animation>
+  <Animation name="hurt" imagePath="89533.png" width="1054" height="5324">
+    <sprite x="23" y="494" w="44" h="54" oX="23" oY="494" oW="522" oH="107" />
+    <sprite x="82" y="495" w="37" h="53" oX="82" oY="495" oW="522" oH="107" />
+	<sprite x="82" y="495" w="37" h="53" oX="82" oY="495" oW="522" oH="107" />
+    <sprite x="23" y="494" w="44" h="54" oX="23" oY="494" oW="522" oH="107" />
+  </Animation>
+  <Animation name="fightUp" imagePath="89533.png" width="1054" height="5324">
+    <sprite x="28" y="730" w="46" h="55" oX="28" oY="730" oW="766" oH="288" />
+    <sprite x="87" y="739" w="47" h="47" oX="87" oY="739" oW="766" oH="288" />
+    <sprite x="151" y="716" w="46" h="71" oX="151" oY="716" oW="766" oH="288" />
+    <sprite x="210" y="724" w="46" h="63" oX="210" oY="724" oW="766" oH="288" />
+    <sprite x="270" y="724" w="46" h="63" oX="270" oY="724" oW="766" oH="288" />
+  </Animation>
+  <Animation name="fightJump" imagePath="89533.png" width="1054" height="5324">
+    <sprite x="766" y="728" w="32" h="59" oX="766" oY="728" oW="-150" oH="194" />
+    <sprite x="812" y="731" w="47" h="56" oX="812" oY="731" oW="-150" oH="194" />
+    <sprite x="872" y="735" w="45" h="52" oX="872" oY="735" oW="-150" oH="194" />
+    <sprite x="930" y="737" w="37" h="50" oX="930" oY="737" oW="-150" oH="194" />
   </Animation>
 
   <Animation name="run" imagePath="89533.png" width="1054" height="5324">
